@@ -1,14 +1,6 @@
+from app.models.problem import Problem
+
 PROBLEMS = [
-        {
-            "id": 1,
-            "title": "Hello World",
-            "difficulty": "Easy",
-            "topic": "introduction"        
-        }, 
-        {
-            "id": 2,
-            "title": "Sum of 2",
-            "difficulty": "Easy",
-            "topic": "math"
-        }
-    ]
+    Problem(1, "Hello World", "Easy", "introduction"), 
+    Problem(2, "Sum of 2", "Easy", "math"),
+]

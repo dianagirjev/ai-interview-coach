@@ -10,4 +10,4 @@ def health_check():
 
 @app.get("/problems")
 def get_problems():
-    return PROBLEMS
+    return [problem.to_dict() for problem in PROBLEMS]
