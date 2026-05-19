@@ -3,6 +3,7 @@ from app.data.problems import PROBLEMS
 
 app = FastAPI()
 
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
