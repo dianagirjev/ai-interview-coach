@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.data.problems import PROBLEMS
+from app.services.problem_service import ProblemService
 
 app = FastAPI()
 
@@ -11,4 +12,5 @@ def health_check():
 
 @app.get("/problems")
 def get_problems():
-    return [problem.to_dict() for problem in PROBLEMS]
+    service = ProblemService(PROBLEMS)
+    return service.get_all_problems()
