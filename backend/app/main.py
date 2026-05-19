@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.data.problems import PROBLEMS
 
 app = FastAPI()
 
@@ -9,17 +10,4 @@ def health_check():
 
 @app.get("/problems")
 def get_problems():
-    return [
-        {
-            "id": 1,
-            "title": "Hello World",
-            "difficulty": "Easy",
-            "topic": "introduction"        
-        }, 
-        {
-            "id": 2,
-            "title": "Sum of 2",
-            "difficulty": "Easy",
-            "topic": "math"
-        }
-    ]
+    return PROBLEMS
