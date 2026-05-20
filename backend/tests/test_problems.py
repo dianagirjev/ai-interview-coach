@@ -13,6 +13,7 @@ def test_get_problems():
     assert len(data) == 2
     assert data[0]["id"] == 1
 
+
 def test_get_problem_by_id():
     response = client.get("/problems/1")
     data = response.json()
@@ -20,6 +21,7 @@ def test_get_problem_by_id():
     assert response.status_code == 200
     assert data["id"] == 1
     assert "title" in data
+
 
 def test_get_problem_by_id_not_found():
     response = client.get("/problems/999")
