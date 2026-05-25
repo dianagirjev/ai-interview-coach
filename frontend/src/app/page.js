@@ -1,20 +1,32 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import StatCard from "@/components/StatCard";
 import ProblemCard from "@/components/ProblemCard";
 
-const problems = [
-  {
-    title: "Hello World",
-    difficulty: "Easy",
-    topic: "Introduction",
-  },
-  {
-    title: "Sum of 2",
-    difficulty: "Easy",
-    topic: "Math",
-  },
-];
-
 export default function Home() {
+  const [problems, setProblems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function fetchProblems() {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/problems");
+        if (!response.ok) {
+          throw new Error("Failed to fetch the problems");
+        }
+        const data = await response.json();
+        setProblems(data);
+      } catch {
+        setError("Could not load problems");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProblems();
+  }, []);
+
   return (
     <main className="min-h-screen bg-gray-50 px-6 py-10 text-gray-900">
       <section className="mx-auto max-w-4xl">
@@ -28,23 +40,27 @@ export default function Home() {
       </section>
       <section className="mx-auto mt-8 max-w-4xl">
         <div className="grid gap-4 md:grid-cols-3">
-          <StatCard label="Problems" value="2" />
+          <StatCard label="Problems" value={problems.length} />
           <StatCard label="Tests" value="7" />
           <StatCard label="Frontend" value="Online" />
         </div>
       </section>
       <section className="mx-auto max-w-4xl mt-4">
         <h2 className="text-xl font-semibold">Practice Problems</h2>
-        <div className="mt-4 grid gap-4">
-          {problems.map((problem) => (
-            <ProblemCard
-              key={problem.title}
-              title={problem.title}
-              difficulty={problem.difficulty}
-              topic={problem.topic}
-            />
-          ))}
-        </div>
+        {loading && <p>Loading problems ...</p>}
+        {error && <p>{error}</p>}
+        {!loading && !error && (
+          <div className="mt-4 grid gap-4">
+            {problems.map((problem) => (
+              <ProblemCard
+                key={problem.id}
+                title={problem.title}
+                difficulty={problem.difficulty}
+                topic={problem.topic}
+              />
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );
