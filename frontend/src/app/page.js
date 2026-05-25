@@ -1,4 +1,18 @@
 import StatCard from "@/components/StatCard";
+import ProblemCard from "@/components/ProblemCard";
+
+const problems = [
+  {
+    title: "Hello World",
+    difficulty: "Easy",
+    topic: "Introduction",
+  },
+  {
+    title: "Sum of 2",
+    difficulty: "Easy",
+    topic: "Math",
+  },
+];
 
 export default function Home() {
   return (
@@ -8,7 +22,7 @@ export default function Home() {
         <p className="mt-3 text-gray-600">
           Practice algorithms with guided feedback.
         </p>
-        <button className="mt-6 bg-black px-4 py-2 rounded-md text-white ">
+        <button className="mt-6 bg-black px-4 py-2 rounded-md text-white">
           Start practicing
         </button>
       </section>
@@ -17,6 +31,19 @@ export default function Home() {
           <StatCard label="Problems" value="2" />
           <StatCard label="Tests" value="7" />
           <StatCard label="Frontend" value="Online" />
+        </div>
+      </section>
+      <section className="mx-auto max-w-4xl mt-4">
+        <h2 className="text-xl font-semibold">Practice Problems</h2>
+        <div className="mt-4 grid gap-4">
+          {problems.map((problem) => (
+            <ProblemCard
+              key={problem.title}
+              title={problem.title}
+              difficulty={problem.difficulty}
+              topic={problem.topic}
+            />
+          ))}
         </div>
       </section>
     </main>
