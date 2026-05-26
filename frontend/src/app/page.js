@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import StatCard from "@/components/StatCard";
 import ProblemCard from "@/components/ProblemCard";
+import ProblemDetails from "@/components/ProblemDetails";
 
 export default function Home() {
   const [problems, setProblems] = useState([]);
@@ -63,23 +64,10 @@ export default function Home() {
             ))}
           </div>
         )}
-        {selectedProblem && (
-          <div className="mt-6 border px-4 py-2 rounded-md bg-white">
-            <h3 className="text-lg font-semibold">{selectedProblem.title}</h3>
-            <p className="mt-2 text-sm text-gray-600">
-              Difficulty: {selectedProblem.difficulty}
-            </p>
-            <p className="mt-1 text-sm text-gray-600">
-              Topic: {selectedProblem.topic}
-            </p>
-            <button
-              className="mt-4 bg-black px-4 py-2 rounded-md text-white text-sm"
-              onClick={() => setSelectedProblem(null)}
-            >
-              Clear selection
-            </button>
-          </div>
-        )}
+        <ProblemDetails
+          problem={selectedProblem}
+          onClear={() => setSelectedProblem(null)}
+        />
       </section>
     </main>
   );
