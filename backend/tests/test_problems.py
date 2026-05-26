@@ -21,6 +21,7 @@ def test_get_problem_by_id():
     assert response.status_code == 200
     assert data["id"] == 1
     assert "title" in data
+    assert "description" in data
 
 
 def test_get_problem_by_id_not_found():
