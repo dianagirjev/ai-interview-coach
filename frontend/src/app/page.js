@@ -72,6 +72,12 @@ export default function Home() {
             <p className="mt-1 text-sm text-gray-600">
               Topic: {selectedProblem.topic}
             </p>
+            <button
+              className="mt-4 bg-black px-4 py-2 rounded-md text-white text-sm"
+              onClick={() => setSelectedProblem(null)}
+            >
+              Clear selection
+            </button>
           </div>
         )}
       </section>
